@@ -20,8 +20,8 @@ setup(
     description='This project is for processing under-ressourced lanuguages such as my mother language ***Kabyle*** ',
     license='Apache 2.0',
     packages=find_packages(exclude=('tests', 'docs')),
-#    install_requires=['requests==2.8.1'],
-#    entry_points={
-#    'console_scripts':[ 'awal=awal.app:run' ],
-#    }
+    install_requires=['requests==2.8.1'],
+    entry_points={
+    'console_scripts':[ 'awal=awal.app:run' ],
+    }
 )
