@@ -12,4 +12,30 @@ def multiply(a, b):
     return a * b
 
 
-print(multiply(my_func(), my_func()))
+## Decorator in python
+## Functions are object
+## Functions can be defined inside other function
+
+
+def null_decorator(func):
+    return func
+
+
+
+
+
+
+def strong(func):
+    def wrapper():
+        return '<strong>'+func()+'</strong>'
+    return wrapper
+
+def emphasis(func):
+    def wrapper():
+        return "<em>" + func() + "</em>"
+    return wrapper
+
+@strong
+@emphasis
+def greet():
+    return 'Hello'
