@@ -80,7 +80,7 @@ guacamole==0.9.2
 h5py==2.9.0
 hdbscan==0.8.24
 html5lib==0.9999999
-httplib2==0.9.1
+httplib2==0.18.0
 idna==2.8
 imbalanced-learn==0.3.3
 imblearn==0.0
