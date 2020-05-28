@@ -1,2 +1,7 @@
 awal/__pycache__
 venv
+data/
+assets/
+.vscode/
+**.swp
+**.pyc

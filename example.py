@@ -2,58 +2,97 @@
 
 
 #
-#Pylint Tutorial
+# Pylint Tutorial
 #
 
-from awal.managedcorpus import managed_corpus
+# from awal.managedcorpus import managed_corpus
+
+
+# import os
+
+# import roots
+
+
+# class Car:
+#     """ tutorial to learn how to us PyLint   """
+#     color = ''
+#     def __init__(self, color):
+#         self.color = color
+#     def __string__(self):
+#         print(self.color)
+#     def get_color(self):
+#         """ Getter """
+#         return self.color
+#     def set_color(self, color):
+#         """ Setter  """
+#         self.color = color
+
+
+# def crach(car1, car2):
+#     """  Craching function is used to processing Car Object  """
+#     car1.color = car2.color
+
+import argparse
 import os
-import roots
+import sys
+from awal.utils.assessment.Phonemes import SAMPAPhonemes
 
-
-class Car:
-    """ tutorial to learn how to us PyLint   """
-    color = ''
-    def __init__(self, color):
-        self.color = color
-    def __string__(self):
-        print(self.color)
-    def get_color(self):
-        """ Getter """
-        return self.color
-    def set_color(self, color):
-        """ Setter  """
-        self.color = color
+from configparser import ConfigParser
 
 
 
+#*************** II ***********************************************************************#
+#parse defaults configuration files
+#******************************************************************************************#
+basedir=os.getcwd()
+config = ConfigParser()
+try:
+    configFilePath=os.path.join(basedir,'default.cfg')
+    config.read(configFilePath)
+    ESPEAK_BIN=os.path.join(basedir,config.get('binary', 'espeak_bin'))
+    POCKETSPHINX_BIN=os.path.join(basedir,config.get('binary', 'pocketsphinx_bin'))
+except ConfigParser.NoSectionError:
+    print("check the section name or config")
 
-def crach(car1, car2):
-    """  Craching function is used to processing Car Object  """
-    car1.color = car2.color
+
+
+
+def build_arg_parser():
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument("audio_file", help="audio file")
+    parser.add_argument("text_file", help="text file")
+    parser.add_argument('--language', dest='lang', default='fr')
+    parser.add_argument('--model', dest='acmod',
+                        default='/home/aghilas/Workspace/Experiments/Nadine/example/config', help='models directory')
+    
+   
+    return parser
 
 def main():
-    """ main function  """
-    my_car = Car('blue')
-    crach(Car('red'), my_car)
-    print('my new car color {}'.format(my_car.get_color()))
-    """" managing roots corpus """
+    args = build_arg_parser().parse_args()
+    audio_file = args.audio_file
+    text_file = args.text_file
     
-    rootsfilename="/home/aghilas/Workspace/data/data_120218/zola_germinal_15/zola_germinal_15_057_syl.json"
-    if os.path.exists(rootsfilename):
-        with managed_corpus(rootsfilename) as corpus:
-            nbutts=corpus.count_utterances()
-            utts=corpus.get_utterances(0,nbutts)
-            for iutt,utt in enumerate(utts):
-                seq_items=utt.get_sequence('Word Text').as_word_sequence().get_all_items()
-                print(len(seq_items))
-                utt.destroy()
 
+    config = {
+        'acmod': args.acmod,
+        'PocketSphinx': POCKETSPHINX_BIN,
+        'eSpeak': ESPEAK_BIN,
+        'language': args.lang
 
-
-
-
-
-
+    }
+    print('********')
+    print(audio_file)
+    print('********')
+    print(text_file)
+    print('configuration :')
+    print(config)
+    with open(text_file,'r') as txtFile:
+        for line in txtFile.readlines():
+            sentence=line.strip().split()
+            phonemes=SAMPAPhonemes().labels(sentence,language)
+            
+            
 
 
 

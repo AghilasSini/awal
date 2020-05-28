@@ -1,13 +1,14 @@
 import sys
 import os
 import argparse
-import roots
+# import roots
 
 
 
 
 class Awal(object):
     def __init__(self, configfilename):
+        self.config=configfilename
 
 
 
