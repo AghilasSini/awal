@@ -160,7 +160,7 @@ patsy==0.4.1
 pbr==1.8.0
 pexpect==4.0.1
 pickleshare==0.7.4
-Pillow==3.1.2
+Pillow>=7.1.0
 pipenv==11.10.0
 pkginfo==1.4.1
 plac==0.9.6
@@ -252,9 +252,9 @@ system-service==0.3
 tables==3.2.2
 tabulate==0.8.6
 tempora==1.9
-tensorboard==2.3.1.
-tensorflow==2.3.1.
-tensorflow-estimator==1.14.0
+tensorboard==1.15.4
+tensorflow==1.15.4
+tensorflow-estimator==1.15.4
 tensorflow-tensorboard==0.1.6
 termcolor==1.1.0
 terminado==0.8.1
