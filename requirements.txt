@@ -121,7 +121,7 @@ livereload==2.4.0
 llvmlite==0.29.0
 louis==2.6.4
 lpthw.web==1.1
-lxml==3.5.0
+lxml==4.6.3
 Magic-file-extensions==0.2
 Mako==1.0.3
 Markdown==3.1.1
